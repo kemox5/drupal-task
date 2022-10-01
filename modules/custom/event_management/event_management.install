@@ -1,0 +1,74 @@
+<?php
+function event_management_schema()
+{
+  $schema['events'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'type' => 'text',
+        'length' => 250,
+        'not null' => TRUE,
+      ),
+      'image' => array(
+        'type' => 'varchar',
+        'length' => 500,
+        'not null' => TRUE,
+      ),
+      'start_date' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'date',
+        'not null' => TRUE,
+      ),
+      'end_date' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'date',
+        'not null' => TRUE,
+      ),
+      'category' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+      ),
+      'is_published' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['events_config_log'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'user_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'type' => 'varchar',
+        'length' => 250,
+        'not null' => TRUE,
+      ),
+      'datetime' => array(
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}

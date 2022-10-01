@@ -1,0 +1,60 @@
+version: '3.3'
+
+services:
+   mysql:
+      image: mysql:8.0
+      container_name: mysql
+      environment:
+         MYSQL_ROOT_PASSWORD: 123456
+         MYSQL_DATABASE: drupal
+         MYSQL_USER: drupal
+         MYSQL_PASSWORD: 123456
+      ports:
+         - 3306:3306
+      volumes:
+         - mysqldata:/var/lib/mysql
+         # - ./mysql:/docker-entrypoint-initdb.d/:ro
+      networks:
+         - internal
+
+   drupal:
+      image: drupal:9.4.7
+      container_name: drupal
+      hostname: drupal.local
+      depends_on:
+         - mysql
+      volumes:
+         - mydata:/var/www/html
+         - ./modules:/var/www/html/modules
+      ports:
+         - 80:80
+      networks:
+         - internal
+
+   phpmyadmin:
+      container_name: phpmyadmin
+      hostname: drupal.local
+      image: phpmyadmin/phpmyadmin
+      depends_on:
+         - mysql
+      environment:
+         PMA_HOST: mysql
+         PMA_PORT: 3306
+         PMA_USER: root
+         PMA_PASSWORD: 123456
+         MYSQL_ROOT_PASSWORD: 123456
+         MYSQL_USER: root
+         MYSQL_PASSWORD: 123456
+      ports:
+         - 8080:80
+      networks:
+         - internal
+
+volumes:
+   mysqldata:
+   mydata:
+
+
+networks:
+   internal:
+      driver: bridge

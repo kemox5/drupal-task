@@ -1,0 +1,61 @@
+#visitors routes
+
+event_management.list:
+  path: '/events'
+  defaults:
+    _controller: '\Drupal\event_management\Controller\EventController::list'
+    _title: 'List Events'
+  requirements: 
+    _permission: 'access content'
+
+event_management.show:
+  path: '/events/{id}'
+  defaults:
+    _controller: '\Drupal\event_management\Controller\EventController::show'
+    _title_callback: '\Drupal\event_management\Controller\EventController::show'
+  requirements: 
+    _permission: 'access content'
+
+
+
+
+
+#admin routes
+
+#list events
+event_management.backend_list:
+  path: '/admin/events'
+  defaults:
+    _controller: '\Drupal\event_management\Controller\DisplayTableController::display'
+    _title: 'Events list'
+  requirements:
+    _permission: 'access content'
+
+#config page
+event_management.config_page:
+  path: '/admin/events/config'
+  defaults:
+    _form: '\Drupal\event_management\Form\EventConfigs'
+    _title: 'Events - Settings'
+  requirements:
+    _permission: 'access administration pages'
+
+
+#events form
+event_management.event_management_form:
+  path: '/admin/events/form'
+  defaults:
+    _form: '\Drupal\event_management\Form\EventForm'
+    _title: 'Event'
+  requirements:
+    _permission: 'access administration pages'
+
+
+#delete event form
+event_management.delete_form:
+  path: '/admin/events/delete/{cid}'
+  defaults:
+    _form: '\Drupal\event_management\Form\DeleteEventForm'
+    _title: 'DeleteForm'
+  requirements:
+     _permission: 'access administration pages'

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function event_management_theme($existing, $type, $theme, $path)
+{
+  return [
+    'event-listing' => [
+      'variables' => ['content' => NULL]
+    ], 
+    'event-show' => [
+      'variables' => ['content' => NULL]
+    ],
+    'event_block' => [
+      'variables' => [
+        'data' => [],
+      ],
+    ],
+  ];
+}

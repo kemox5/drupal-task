@@ -1,0 +1,86 @@
+<style>
+	.event {
+		box-shadow: 1px 1px 5px 1px #dbdbdb;
+		margin-bottom: 30px;
+		display: block;
+		color: #000 !important;
+		text-decoration: none !important;
+	}
+
+	.event > div {
+		display: inline-block
+	}
+
+	.image-wrapper {
+		width: 35%;
+		overflow: hidden;
+		vertical-align: top;
+	}
+
+	.event h1 {
+		font-size: 20px;
+		margin: 0 0 10px;
+		line-height: 25px;
+	}
+
+	.event .text {
+		width: 64%;
+	}
+
+	.text > div {
+		padding: 10px;
+	}
+
+	.description {
+		margin-bottom: 10px;
+	}
+
+	.date {
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	.date > div {
+		display: inline-block;
+		margin-right: 30px
+	}
+</style>
+
+<div>
+	<div class="">
+		{% for event in content.events %}
+			<a class="event" href="/events/{{event.id}}">
+				<div class="image-wrapper">
+					<img src="{{file_url('public://') ~ event.image}}" alt="{{event.title[:10]}}">
+				</div>
+				<div class="text">
+					<div>
+						<h1>
+							{{ event.title[:50] }}
+						</h1>
+						<div class="description">
+							{{event.description[:250] | striptags}}
+						</div>
+						<div class="date">
+							<div>
+								From:
+								{{event.start_date}}
+							</div>
+							<div>
+								To:
+								{{event.end_date}}
+							</div>
+						</div>
+						<div>
+							#{{event.category}}
+						</div>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+
+		{% if content.events  is empty %}
+			<div>No Events</div>
+		{% endif %}
+	</div>
+</div>

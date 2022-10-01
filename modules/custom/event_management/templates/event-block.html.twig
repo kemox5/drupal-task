@@ -1,0 +1,21 @@
+<style>
+	.event-block {
+		box-shadow: 1px 1px 5px 1px #dbdbdb;
+		margin-bottom: 30px;
+		display: block;
+		color: #000 !important;
+		text-decoration: none !important;
+	}
+	.event-title{
+		padding: 10px 8px;
+	}
+</style>
+
+{% for event in data %}
+	<div>
+		<a href="/events/{{event.id}}" class="event-block">
+			<div><img src="{{file_url('public://') ~ event.image}}" alt="{{event.title[:10]}}"></div>
+			<div class="event-title">{{ event.title }}</div>
+		</a>
+	</div>
+{% endfor %}
